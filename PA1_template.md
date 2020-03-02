@@ -1,92 +1,76 @@
----
-title: 'Reproducible Research: Peer Assessment 1'
-output:
-  html_document:
-    keep_md: yes
----
-  
-## 1. Code for reading in the dataset and/or processing the data
+Reproducible Research: Peer Assessment 1
+================
 
+## 1\. Code for reading in the dataset and/or processing the data
 
-```r
+``` r
 activity <- read.csv("activity.csv", header=TRUE, na.strings = "NA")
 ```
 
-## 2. Histogram of the total number of steps taken each day
+## 2\. Histogram of the total number of steps taken each day
 
-
-```r
+``` r
 totalsteps <- aggregate(steps ~ date, data = activity, sum, na.rm = TRUE)
 
 hist(totalsteps$steps, col="GREY", main="Total Number of Steps", xlab="Number of Steps", ylim = c(0, 40))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](PA1_template_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-## 3. Mean and median number of steps taken each day
+## 3\. Mean and median number of steps taken each day
 
-
-```r
+``` r
 meansteps <- mean(totalsteps$steps)
 meansteps
 ```
 
-```
-## [1] 10766.19
-```
+    ## [1] 10766.19
 
-```r
+``` r
 mediansteps <- median(totalsteps$steps)
 mediansteps
 ```
 
-```
-## [1] 10765
-```
+    ## [1] 10765
 
-* The mean of steps taken per day is 10766.19. 
-* The median of steps taken per day is 10765.
+  - The mean of steps taken per day is 10766.19.
+  - The median of steps taken per day is 10765.
 
-## 4. Time series plot of the average number of steps taken
+## 4\. Time series plot of the average number of steps taken
 
-
-```r
+``` r
 stepsinterval <- aggregate(steps ~ interval, data = activity, mean, na.rm = TRUE)
 
 plot(steps ~ interval, data = stepsinterval, type = "l", main="Average Number of Steps", xlab="Interval Through Day (Minutes)", ylab="Average Number of Steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-## 5. The 5-minute interval that, on average, contains the maximum number of steps
+## 5\. The 5-minute interval that, on average, contains the maximum number of steps
 
-
-```r
+``` r
 stepsinterval$interval[which.max(stepsinterval$steps)]
 ```
 
-```
-## [1] 835
-```
+    ## [1] 835
 
-* The 5 minute interval that contains the most number of steps is the 835th
+  - The 5 minute interval that contains the most number of steps is the
+    835th
 
-## 6. Code to describe and show a strategy for imputing missing data
+## 6\. Code to describe and show a strategy for imputing missing data
 
-
-```r
+``` r
 na<-sum(is.na(activity))
 na
 ```
 
-```
-## [1] 2304
-```
+    ## [1] 2304
 
-* Total number of missing days is 2304
+  - Total number of missing days is 2304
 
+<!-- end list -->
 
-```r
+``` r
 activity2 <- activity
 
 for (i in 1:length(activity2$steps)) {
@@ -105,35 +89,31 @@ meansteps2 <- mean(totalsteps2$steps)
 meansteps2
 ```
 
-```
-## [1] 10766.19
-```
+    ## [1] 10766.19
 
-```r
+``` r
 mediansteps2 <- median(totalsteps2$steps)
 mediansteps2
 ```
 
-```
-## [1] 10766.19
-```
+    ## [1] 10766.19
 
-* The mean of steps taken per day is 10766.19 (same as mean before imputing NAs). 
-* The median of steps taken per day is 10766.19 (0.01% above median before imputing NAs)
+  - The mean of steps taken per day is 10766.19 (same as mean before
+    imputing NAs).
+  - The median of steps taken per day is 10766.19 (0.01% above median
+    before imputing NAs)
 
-## 7. Histogram of the total number of steps taken each day after missing values are imputed
+## 7\. Histogram of the total number of steps taken each day after missing values are imputed
 
-
-```r
+``` r
 hist(totalsteps2$steps, col="RED", main="Total Number of Steps", xlab="Number of Steps", ylim = c(0, 40))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](PA1_template_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-## 8. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
+## 8\. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
 
-
-```r
+``` r
 activity2date <- as.Date(activity2$date)
 
 weekday <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
@@ -147,5 +127,4 @@ with(subset(weekdayweekend,day=="Weekday"), plot(interval,steps, type="l",main="
 with(subset(weekdayweekend,day=="Weekend"), plot(interval,steps, type="l",main="Weekend",col="BLUE",ylim = c(0, 250)))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
-
+![](PA1_template_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
