@@ -21,7 +21,7 @@ totalsteps <- aggregate(steps ~ date, data = activity, sum, na.rm = TRUE)
 hist(totalsteps$steps, col="GREY", main="Total Number of Steps", xlab="Number of Steps", ylim = c(0, 40))
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 ## 3. Mean and median number of steps taken each day
 
@@ -56,7 +56,7 @@ stepsinterval <- aggregate(steps ~ interval, data = activity, mean, na.rm = TRUE
 plot(steps ~ interval, data = stepsinterval, type = "l", main="Average Number of Steps", xlab="Interval Through Day (Minutes)", ylab="Average Number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 ## 5. The 5-minute interval that, on average, contains the maximum number of steps
 
@@ -128,7 +128,7 @@ mediansteps2
 hist(totalsteps2$steps, col="RED", main="Total Number of Steps", xlab="Number of Steps", ylim = c(0, 40))
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ## 8. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
 
@@ -147,4 +147,4 @@ with(subset(weekdayweekend,day=="Weekday"), plot(interval,steps, type="l",main="
 with(subset(weekdayweekend,day=="Weekend"), plot(interval,steps, type="l",main="Weekend",col="BLUE",ylim = c(0, 250)))
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
